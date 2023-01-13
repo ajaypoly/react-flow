@@ -94,7 +94,6 @@ export function createNodesAndEdges() {
       type: 'floating',
       markerEnd: {
         type: MarkerType.Arrow,
-        
       },
     });
   }

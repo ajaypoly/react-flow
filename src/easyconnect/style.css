@@ -53,3 +53,10 @@
     opacity: 0;
   }
   
+  .edgebutton{
+    background-color: rgb(147, 204, 255);
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    border-radius: 10%;
+  }
