@@ -23,46 +23,27 @@ const initialNodes = [
   {
     id: "1",
     type: "custom",
+    label: "x",
   },
   {
     id: "2",
     type: "custom",
+    label: "x",
   },
   {
     id: "3",
     type: "custom",
+    label: "x",
   },
   {
     id: "4",
     type: "custom",
+    label: "x",
   },
 ];
 
 const initialEdges = [
-    // {
-    //     id: 'edge-1-2',
-    //     source: '1',
-    //     target: '2',
-    //     type: 'buttonedge',
-    //   },
-    //   {
-    //     id: 'edge-1-2',
-    //     source: '2',
-    //     target: '4',
-    //     type: 'buttonedge',
-    //   },
-    //   {
-    //     id: 'edge-1-2',
-    //     source: '2',
-    //     target: '3',
-    //     type: 'buttonedge',
-    //   },
-    //   {
-    //     id: 'edge-1-2',
-    //     source: '1',
-    //     target: '4',
-    //     type: 'buttonedge',
-    //   },
+
 ];
 
 const connectionLineStyle = {
@@ -113,6 +94,8 @@ const getLayoutedElements = (nodes, edges, direction = "LR") => {
 const defaultEdgeOptions = {
   style: { strokeWidth: 1, stroke: "black" },
   type: "floating",
+  label: "x",
+
   markerEnd: {
     type: MarkerType.ArrowClosed,
     color: "black",
@@ -129,25 +112,24 @@ const EasyConnectExample = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
   console.log(edges);
+  // const onConnect = useCallback(
+  //   (params) => setEdges((eds) => addEdge(params, eds)),
+  //   [setEdges]
+  // );
 
   const onConnect = useCallback(
-    (params) =>
-      setEdges((eds) =>
-        addEdge(
-          { ...params, type: ConnectionLineType.SmoothStep, animated: true },
-          eds
-        )
-      ),
-    []
+    (params) => setEdges((eds) => addEdge({ ...params, label: "x" }, eds)),
+    [setEdges]
   );
-
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;
   }, []);
 
   const onEdgeUpdate = useCallback((oldEdge, newConnection) => {
     edgeUpdateSuccessful.current = true;
-    setEdges((els) => updateEdge(oldEdge, newConnection, els));
+    setEdges((els) =>
+      updateEdge(oldEdge, newConnection, els)
+    );
   }, []);
 
   const onEdgeUpdateEnd = useCallback((_, edge) => {
