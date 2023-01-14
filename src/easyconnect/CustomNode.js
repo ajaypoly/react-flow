@@ -10,7 +10,7 @@ export default function CustomNode({ id }) {
   const label = isTarget ? 'Target' : 'Task';
 
   return (
-    <div className="customNode">
+    <div className="customNode">  
       <div
         className="customNodeBody"
         style={{
