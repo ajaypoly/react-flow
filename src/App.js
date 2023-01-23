@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from "react";
 
 import ReactFlow, {
   addEdge,
@@ -6,17 +6,18 @@ import ReactFlow, {
   ConnectionLineType,
   useNodesState,
   useEdgesState,
-  updateEdge
-} from 'reactflow';
+  updateEdge,
+} from "reactflow";
 
-import CustomNode from './CustomNode';
-import CustomConnectionLine from './CustomConnectionLine';
-import dagre from 'dagre';
-import { useStore, getStraightPath } from 'reactflow';
-import './style.css';
-import { getEdgeParams } from './utils.js';
-import 'reactflow/dist/style.css';
-import './style.css';
+import CustomNode from "./CustomNode";
+import CustomConnectionLine from "./CustomConnectionLine";
+import dagre from "dagre";
+import { useStore, getStraightPath } from "reactflow";
+import "./style.css";
+import { getEdgeParams } from "./utils.js";
+import "reactflow/dist/style.css";
+import EditorHorizontalRuleIcon from "@atlaskit/icon/glyph/editor/horizontal-rule";
+import "./style.css";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -25,22 +26,22 @@ const nodeHeight = 36;
 
 const initialNodes = [
   {
-    id: 'task 0381c7c2-851d-4110-937e-b7c464c2787f',
-    type: 'custom',
-    data: { label: 'Node B' }
+    id: "task 0381c7c2-851d-4110-937e-b7c464c2787f",
+    type: "custom",
+    data: { label: "Node B" },
   },
   {
-    id: '2',
-    type: 'custom'
+    id: "2",
+    type: "custom",
   },
   {
-    id: '3',
-    type: 'custom'
+    id: "3",
+    type: "custom",
   },
   {
-    id: '4',
-    type: 'custom'
-  }
+    id: "4",
+    type: "custom",
+  },
 ];
 const initialEdges = [
   // { id: 'e1-2', source: '1', target: '2',}
@@ -48,15 +49,15 @@ const initialEdges = [
 
 const connectionLineStyle = {
   strokeWidth: 1,
-  stroke: 'black'
+  stroke: "black",
 };
 
 const nodeTypes = {
-  custom: CustomNode
+  custom: CustomNode,
 };
 
-const getLayoutedElements = (nodes, edges, direction = 'LR') => {
-  const isHorizontal = direction === 'LR';
+const getLayoutedElements = (nodes, edges, direction = "LR") => {
+  const isHorizontal = direction === "LR";
   dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach((node) => {
@@ -71,14 +72,14 @@ const getLayoutedElements = (nodes, edges, direction = 'LR') => {
 
   nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    node.targetPosition = isHorizontal ? 'left' : 'top';
-    node.sourcePosition = isHorizontal ? 'right' : 'bottom';
+    node.targetPosition = isHorizontal ? "left" : "top";
+    node.sourcePosition = isHorizontal ? "right" : "bottom";
 
     // We are shifting the dagre node position (anchor=center center) to the top left
     // so it matches the React Flow node anchor point (top left).
     node.position = {
       x: nodeWithPosition.x - nodeWidth / 2,
-      y: nodeWithPosition.y - nodeHeight / 2
+      y: nodeWithPosition.y - nodeHeight / 2,
     };
 
     return node;
@@ -88,14 +89,14 @@ const getLayoutedElements = (nodes, edges, direction = 'LR') => {
 };
 
 const defaultEdgeOptions = {
-  style: { strokeWidth: 1, stroke: 'black' },
-  type: 'floating',
-  label: 'x',
+  style: { strokeWidth: 1, stroke: "black" },
+  type: "floating",
+  label: "x",
 
   markerEnd: {
     type: MarkerType.ArrowClosed,
-    color: 'black'
-  }
+    color: "black",
+  },
 };
 const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
   initialNodes,
@@ -114,7 +115,7 @@ const EasyConnectExample = () => {
   // );
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge({ ...params, label: 'x' }, eds)),
+    (params) => setEdges((eds) => addEdge({ ...params, label: "x" }, eds)),
     [setEdges]
   );
   const onEdgeUpdateStart = useCallback(() => {
@@ -152,15 +153,15 @@ const EasyConnectExample = () => {
       sourceX: sx,
       sourceY: sy,
       targetX: tx,
-      targetY: ty
+      targetY: ty,
     });
 
     return (
       <>
-        {' '}
+        {" "}
         <path
           id={id}
-          className='react-flow__edge-path'
+          className="react-flow__edge-path"
           d={edgePath}
           markerEnd={markerEnd}
           style={style}
@@ -168,18 +169,16 @@ const EasyConnectExample = () => {
         <foreignObject
           width={foreignObjectSize}
           height={foreignObjectSize}
-          x={labelX - foreignObjectSize / 2}
-          y={labelY - foreignObjectSize / 2}
-          className='edgebutton-foreignobject'
-          requiredExtensions='http://www.w3.org/1999/xhtml'
+          x={labelX - foreignObjectSize / 5}
+          y={labelY - foreignObjectSize / 5}
+          className="edgebutton-foreignobject"
+          requiredExtensions="http://www.w3.org/1999/xhtml"
         >
-          <div>
-            <button
-              className='edgebutton'
-              onClick={(event) => onEdgeClick(event, id)}
-            >
-              x
-            </button>
+          <div
+            className="edgebutton"
+            onClick={(event) => onEdgeClick(event, id)}
+          >
+            <div className="minus-icon">-</div>
           </div>
         </foreignObject>
       </>
@@ -187,7 +186,7 @@ const EasyConnectExample = () => {
   }
 
   const edgeTypes = {
-    floating: FloatingEdge
+    floating: FloatingEdge,
   };
 
   const onEdgeUpdateEnd = useCallback((_, edge) => {
@@ -199,14 +198,13 @@ const EasyConnectExample = () => {
   }, []);
 
   return (
-    <div className='layoutflow' style={{ width: '100%', height: '100vh' }}>
+    <div className="layoutflow" style={{ width: "100%", height: "100vh" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        fitView
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}

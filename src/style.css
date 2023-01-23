@@ -1,18 +1,22 @@
 .customNodeBody {
-  width: 172px;
-  height: 36px;
-  border: 1px solid black;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  width: 280px;
+  height: 60px;
+  border: transparent;
+  font-weight: 600;
+  font-size: 16px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 6px 0px 6px 6px;
+
 }
 
 .customNode:before {
-  content: '';
   position: absolute;
   top: -10px;
   left: 50%;
@@ -54,10 +58,42 @@ div.targetHandle {
 }
 
 .edgebutton {
-  background-color: transparent;
+  background: #626F86;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drag-icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 22px;
+  left: 90%;
+  z-index: 2;
+}
+
+.edit-delete-icon {
+  filter: invert(43%) sepia(12%) saturate(788%) hue-rotate(180deg) brightness(96%) contrast(88%);
+  display: flex;
+  width: 25%;
+  height: 30px;
+  align-items: center;
+  justify-content: end;
+  z-index: 2;
+}
+
+.edit-delete-icon svg {
   width: 20px;
   height: 20px;
-  border-radius: 10%;
-cursor: pointer;
-  border: none;
+  padding-left: 5px;
+}
+.minus-icon{
+  font-size: 30px;
+  font: 300;
 }
