@@ -12,7 +12,7 @@ import ReactFlow, {
 import CustomNode from "./CustomNode";
 import CustomConnectionLine from "./CustomConnectionLine";
 import dagre from "dagre";
-import { useStore, getStraightPath } from "reactflow";
+import { useStore, getSmoothStepPath } from "reactflow";
 import "./style.css";
 import { getEdgeParams } from "./utils.js";
 import "reactflow/dist/style.css";
@@ -26,7 +26,7 @@ const nodeHeight = 36;
 
 const initialNodes = [
   {
-    id: "task 0381c7c2-851d-4110-937e-b7c464c2787f",
+    id: "1",
     type: "custom",
     data: { label: "Node B" },
   },
@@ -44,7 +44,9 @@ const initialNodes = [
   },
 ];
 const initialEdges = [
-  // { id: 'e1-2', source: '1', target: '2',}
+  { id: "2", source: "1", target: "2" },
+  { id: "3", source: "1", target: "3" },
+  { id: "4", source: "1", target: "4" },
 ];
 
 const connectionLineStyle = {
@@ -56,7 +58,7 @@ const nodeTypes = {
   custom: CustomNode,
 };
 
-const getLayoutedElements = (nodes, edges, direction = "LR") => {
+const getLayoutedElements = (nodes, edges, direction = "TB") => {
   const isHorizontal = direction === "LR";
   dagreGraph.setGraph({ rankdir: direction });
 
@@ -91,7 +93,6 @@ const getLayoutedElements = (nodes, edges, direction = "LR") => {
 const defaultEdgeOptions = {
   style: { strokeWidth: 1, stroke: "black" },
   type: "floating",
-  label: "x",
 
   markerEnd: {
     type: MarkerType.ArrowClosed,
@@ -148,8 +149,7 @@ const EasyConnectExample = () => {
     };
 
     const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
-
-    const [edgePath, labelX, labelY] = getStraightPath({
+    const [edgePath, labelX, labelY] = getSmoothStepPath({
       sourceX: sx,
       sourceY: sy,
       targetX: tx,
